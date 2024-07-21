@@ -2,8 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ThunkConfig } from "@/app/providers/store";
 import { userActions } from "@/entities/User";
 import { AuthData } from "@/entities/User";
-import { AxiosError, AxiosResponse } from "axios";
-import { error } from "console";
+import { AxiosError } from "axios";
 
 interface ServerError {
   errors: string[];

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ThunkConfig } from "@/app/providers/store";
-import { userActions } from "@/entities/User/model/slice/userSlice";
+import { userActions } from "@/entities/User";
 
 export const logout = createAsyncThunk<void, void, ThunkConfig<string>>(
   "auth/logout",

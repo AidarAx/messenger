@@ -1,8 +1,8 @@
-import { classNames } from "@/shared/lib/classNames/classNames";
+import { classNames } from "@/shared/lib/classNames";
 import { memo, useCallback } from "react";
 import cls from "./Header.module.scss";
 import { logout } from "@/features/AuthByEmail";
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
+import { useAppDispatch } from "@/shared/lib/hooks";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/shared/const/router";
 

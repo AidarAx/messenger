@@ -1,18 +1,19 @@
 import { FormEvent, memo, useCallback } from "react";
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector.ts";
-import { selectLoginEmail } from "../../model/selectors/selectLoginEmail/selectLoginEmail.ts";
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch.ts";
+import { useAppSelector, useAppDispatch } from "@/shared/lib/hooks";
 import { loginActions } from "../..//model/slice/loginSlice.ts";
-import { selectLoginPassword } from "../../model/selectors/selectLoginPassword/selectLoginPassword.ts";
-import { loginByEmail } from "../../model/services/loginByEmail/loginByEmail.ts";
+import { loginByEmail } from "../../model/services";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/shared/const/router.ts";
 import cls from "./LoginForm.module.scss";
 import { classNames } from "@/shared/lib/classNames/classNames.ts";
 import { Input } from "@/shared/ui/Input/Input.tsx";
 import { Button } from "@/shared/ui/Button/Button.tsx";
-import { selectLoginError } from "../../model/selectors/selectLoginError/selectLoginError.ts";
-import { selectLoginIsLoading } from "../../model/selectors/selectLoginIsLoading/selectLoginIsLoading.ts";
+import {
+  selectLoginIsLoading,
+  selectLoginPassword,
+  selectLoginEmail,
+  selectLoginError,
+} from "../../model/selectors";
 
 interface LoginFormProps {
   className?: string;
@@ -59,7 +60,7 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
         </div>
       )}
       <form className={cls.form}>
-        <div className={cls.label}>Email</div>
+        <label className={cls.label}>Email</label>
         <Input
           type="email"
           value={email}
@@ -67,7 +68,7 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
           placeholder="Электронная почта"
           className={cls.input}
         />
-        <div className={cls.label}>Password</div>
+        <label className={cls.label}>Password</label>
         <Input
           type="password"
           onChange={(e) => onChangePassword(e.target.value)}

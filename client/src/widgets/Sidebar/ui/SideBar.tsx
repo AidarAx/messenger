@@ -1,6 +1,6 @@
 import { memo } from "react";
 import cls from "./Sidebar.module.scss";
-import { classNames } from "@/shared/lib/classNames/classNames";
+import { classNames } from "@/shared/lib/classNames";
 
 interface SidebarProps {
   className?: string;
