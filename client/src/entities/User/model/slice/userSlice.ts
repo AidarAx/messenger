@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { User, UserSchema } from "../types/userSchema";
+import { AuthData, UserSchema } from "../types/userSchema";
+import { ACCESS_TOKEN } from "@/shared/const/localStorage";
 
 const initialState: UserSchema = {
   authData: undefined,
@@ -10,15 +11,15 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setAuthData: (state, action: PayloadAction<User>) => {
+    setAuthData: (state, action: PayloadAction<AuthData>) => {
       state.authData = action.payload;
       state.isAuth = true;
-      localStorage.setItem("token", action.payload.accessToken);
+      localStorage.setItem(ACCESS_TOKEN, action.payload.accessToken);
     },
     logout: (state) => {
       state.authData = undefined;
       state.isAuth = false;
-      localStorage.removeItem("token");
+      localStorage.removeItem(ACCESS_TOKEN);
     },
   },
 });

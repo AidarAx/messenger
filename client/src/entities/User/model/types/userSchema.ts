@@ -1,13 +1,15 @@
 export interface User {
-  userData: {
-    id: string;
-    email: string;
-  };
+  id: string;
+  email: string;
+}
+
+export interface AuthData {
+  user: User;
   refreshToken: string;
   accessToken: string;
 }
 
 export interface UserSchema {
-  authData?: User;
+  authData?: AuthData;
   isAuth: boolean;
 }

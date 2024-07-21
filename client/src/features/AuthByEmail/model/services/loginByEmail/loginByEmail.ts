@@ -1,7 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { User } from "@/entities/User";
 import { ThunkConfig } from "@/app/providers/store";
-import { userActions } from "@/entities/User/model/slice/userSlice";
+import { userActions } from "@/entities/User";
+import { AuthData } from "@/entities/User";
+import { AxiosError, AxiosResponse } from "axios";
+import { error } from "console";
+
+interface ServerError {
+  errors: string[];
+  message: string;
+}
 
 interface LoginByEmailProps {
   email: string;
@@ -9,14 +16,14 @@ interface LoginByEmailProps {
 }
 
 export const loginByEmail = createAsyncThunk<
-  User,
+  AuthData,
   LoginByEmailProps,
-  ThunkConfig<string>
+  ThunkConfig<string | undefined>
 >("auth/loginByEmail", async ({ email, password }, thunkApi) => {
   const { extra, dispatch, rejectWithValue } = thunkApi;
 
   try {
-    const response = await extra.api.post<User>("/login", {
+    const response = await extra.api.post<AuthData>("/login", {
       email,
       password,
     });
@@ -29,7 +36,8 @@ export const loginByEmail = createAsyncThunk<
 
     return response.data;
   } catch (e) {
-    console.log(e);
-    return rejectWithValue("error");
+    const error: AxiosError<ServerError> = e as any;
+    console.log(error);
+    return rejectWithValue(error.response?.data.message);
   }
 });

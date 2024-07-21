@@ -1,10 +1,22 @@
-import { LoginForm } from "@/features/AuthByEmail/ui/LoginForm/LoginForm";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./providers/router";
+import { useEffect } from "react";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
+import { ACCESS_TOKEN } from "@/shared/const/localStorage";
+import { checkAuth } from "@/features/AuthByEmail";
 
 const App = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem(ACCESS_TOKEN)) {
+      dispatch(checkAuth());
+    }
+  }, []);
+
   return (
     <div>
-      Hello world
-      <LoginForm />
+      <RouterProvider router={router} />
     </div>
   );
 };
