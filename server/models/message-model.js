@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const messageSchema = new Schema(
+const MessageSchema = new Schema(
   {
     messageId: {
       type: String,
@@ -32,3 +32,5 @@ const messageSchema = new Schema(
     timestamps: true
   }
 )
+
+module.exports = model('Message', MessageSchema)
